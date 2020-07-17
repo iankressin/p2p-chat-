@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World!</title>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' 'unsafe-inline';"
+    />
+    <link rel="stylesheet" href="css/lib/normalize.css" />
+    <link rel="stylesheet" href="css/lib/skeleton.css" />
+    <link rel="stylesheet" href="css/index.css" />
+  </head>
+  <body>
+    <div class="app">
+      <div class="row">
+        <h4>Messages</h4>
+        <div id="board" class="message-board">
+          <template id="from-me">
+            <div class="message-container">
+              <div class="message message-from-me">
+                <span class="message-content"> </span>
+              </div>
+            </div>
+          </template>
+
+          <template id="from-others">
+            <div class="message-container">
+              <div class="message message-from-others">
+                <span class="message-content"
+                  >SOMEONE sent a message to me!</span
+                >
+              </div>
+            </div>
+          </template>
+        </div>
+      </div>
+
+      <div class="row form-container">
+        <form>
+          <div class="nine columns">
+            <input id="message" class="u-full-width" type="text" />
+          </div>
+          <div class="three columns">
+            <button class="u-full-width" onclick="send(event)">
+              Send message
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="./js/index.js"></script>
+  </body>
+</html>

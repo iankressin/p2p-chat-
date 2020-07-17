@@ -1,0 +1,50 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+}
+
+.message-board {
+  overflow: auto;
+  padding: 15px;
+}
+
+.message-board {
+  height: 100%;
+  width: 100%;
+  background-color: pink;
+  display: flex;
+  flex-direction: column;
+}
+
+.message-from-me {
+  background-color: #cccccc;
+  float: right;
+}
+
+.message-from-others {
+  background-color: #f0f0f0;
+  float: left;
+}
+
+.form-container {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.message {
+  max-width: 400px;
+  padding: 5px;
+  border-radius: 8px;
+  margin-bottom: 5px;
+}
+
+.form {
+  margin-top: auto;
+}
