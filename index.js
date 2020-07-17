@@ -1,6 +1,6 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
-const udp = require("./client/peer");
-const events = require("./client/events");
+const udp = require("./updServer/peer");
+const events = require("./updServer/events");
 
 function createWindow() {
   udp.connect();
@@ -22,7 +22,7 @@ function createWindow() {
     win.webContents.send("remote::message", message);
   });
 
-  win.loadFile("index.html");
+  win.loadFile("./client/index.html");
 }
 
 app.whenReady().then(createWindow);

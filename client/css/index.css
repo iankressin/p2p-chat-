@@ -15,7 +15,6 @@
 .message-board {
   height: 100%;
   width: 100%;
-  background-color: pink;
   display: flex;
   flex-direction: column;
 }
@@ -40,7 +39,7 @@
 
 .message {
   max-width: 400px;
-  padding: 5px;
+  padding: 5px 10px;
   border-radius: 8px;
   margin-bottom: 5px;
 }
