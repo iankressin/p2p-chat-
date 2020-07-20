@@ -1,9 +1,10 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
-const udp = require("./updServer/peer");
+const UdpServer = require("./updServer/peer");
 const events = require("./updServer/events");
 
 function createWindow() {
-  udp.connect();
+  const udpServer = new UdpServer();
+  udpServer.connectToServer();
 
   let win = new BrowserWindow({
     width: 800,
