@@ -5,8 +5,7 @@ function handleFakeClick() {
 const { ipcRenderer } = require("electron");
 
 ipcRenderer.on("remote::message", (event, message) => {
-  console.log(message);
-  addMessageToBoard("from-others", message.message.message);
+  addMessageToBoard("from-others", message.message.content);
 });
 
 function send(event) {
