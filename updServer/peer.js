@@ -46,11 +46,18 @@ class UdpServer {
         case "server::announceMe":
           this.handleAnnounceMe(message);
           this.handleAnnounceMe(message);
+          this.handleAnnounceMe(message);
+          this.handleAnnounceMe(message);
+          this.handleAnnounceMe(message);
+          this.handleAnnounceMe(message);
           break;
         case "remote::newMessage":
           this.handleNewMessage(message);
           break;
         case "remote::announcing":
+          this.handleConnection(message);
+          this.handleConnection(message);
+          this.handleConnection(message);
           this.handleConnection(message);
           this.handleConnection(message);
       }
@@ -87,7 +94,16 @@ class UdpServer {
     events.emit("remote::message", { message });
   };
 
-  handleConnection = message => {};
+  handleConnection = message => {
+    this.sendPacket(
+      "remote::connection".toString(2),
+      message.client.port,
+      message.client.address,
+      error => {
+        console.log("Error >>> ", error);
+      }
+    );
+  };
 
   registerLocalEvents = () => {
     events.on("local::message", data => {
