@@ -49,20 +49,32 @@ class UdpServer {
           break;
         case "remote::announcing":
           this.handleConnection(message);
+        case "remote::punchingHole":
+          setTimeout(
+            () =>
+              this.sendPacket(
+                "remote::punchingHole",
+                message.client.port,
+                message.client.address,
+                err => console.log("Err: ", err)
+              ),
+            4000
+          );
       }
     });
   };
 
   handleNewPeer = message => {
     this.connections.push(message.client);
-
-    this.sendPacket(
-      "remote::punchingHole".toString(2),
-      message.client.port,
-      message.client.address,
-      error => {
-        console.log("Error >>> ", error);
-      }
+    setTimeout(
+      () =>
+        this.sendPacket(
+          { action: "remote::session" },
+          message.client.port,
+          message.client.address,
+          err => console.log("Err: ", err)
+        ),
+      4000
     );
   };
 
