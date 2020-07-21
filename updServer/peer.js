@@ -49,6 +49,13 @@ class UdpServer {
           break;
         case "remote::announcing":
           this.handleConnection(message);
+        case "remote::session":
+          this.sendPacket(
+            { action: "remote::opened" },
+            info.port,
+            info.address,
+            err => console.log("Error: ", err)
+          );
       }
     });
   };
