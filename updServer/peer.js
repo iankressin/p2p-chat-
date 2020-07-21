@@ -49,6 +49,7 @@ class UdpServer {
           break;
         case "remote::announcing":
           this.handleConnection(message);
+          break;
         case "remote::punchingHole":
           setTimeout(
             () =>
@@ -59,7 +60,16 @@ class UdpServer {
                 err => console.log("Err: ", err)
               ),
             4000
+          )
+          break;
+        case "remote::session":
+          this.sendPacket(
+            { action: "remote::opened" },
+            info.port,
+            info.address,
+            err => console.log("Error: ", err)
           );
+          break;
       }
     });
   };
