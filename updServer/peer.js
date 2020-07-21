@@ -40,25 +40,14 @@ class UdpServer {
       switch (message.action) {
         case "server::newPeer":
           this.handleNewPeer(message);
-          this.handleNewPeer(message);
           break;
-        // Receive from the server all the node in the network and introduce itselfe
-        case "server::announceMe":
-          this.handleAnnounceMe(message);
-          this.handleAnnounceMe(message);
-          this.handleAnnounceMe(message);
-          this.handleAnnounceMe(message);
-          this.handleAnnounceMe(message);
-          this.handleAnnounceMe(message);
+        case "server:swarm":
+          this.handleNewSwarm(message);
           break;
         case "remote::newMessage":
           this.handleNewMessage(message);
           break;
         case "remote::announcing":
-          this.handleConnection(message);
-          this.handleConnection(message);
-          this.handleConnection(message);
-          this.handleConnection(message);
           this.handleConnection(message);
       }
     });
@@ -67,10 +56,8 @@ class UdpServer {
   handleNewPeer = message => {
     this.connections.push(message.client);
 
-    // The first packet will probably got rejected
-    // Due to the firewall from the other peer, so we need to try again
     this.sendPacket(
-      "remote::connection".toString(2),
+      "remote::punchingHole".toString(2),
       message.client.port,
       message.client.address,
       error => {
@@ -79,13 +66,17 @@ class UdpServer {
     );
   };
 
-  handleAnnounceMe = message => {
-    message.peers.forEach(peer =>
+  handleNewSwarm = message => {
+    this.connections = message.peers;
+
+    this.connection.udpSocket.forEach(peer =>
       this.sendPacket(
-        "remote::announcing".toString(2),
-        peer.port,
-        peer.address,
-        error => console.log("Error >>>", error)
+        "remote::punchingHole".toString(2),
+        message.client.port,
+        message.client.address,
+        error => {
+          console.log("Error >>> ", error);
+        }
       )
     );
   };
@@ -112,6 +103,8 @@ class UdpServer {
         peer: this.client,
         content: data.message
       };
+
+      console.log(this.connections.length);
 
       this.connections.map(peer => {
         this.sendPacket(packetContent, peer.port, peer.address, error =>
