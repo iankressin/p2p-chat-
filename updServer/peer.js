@@ -96,12 +96,12 @@ class UdpServer {
         peer: this.client,
         content: data.message
       };
-    });
 
-    this.connections.map(peer => {
-      this.sendPacket(packetContent, peer.port, peer.address, error =>
-        console.log(error)
-      );
+      this.connections.map(peer => {
+        this.sendPacket(packetContent, peer.port, peer.address, error =>
+          console.log(error)
+        );
+      });
     });
   };
 
