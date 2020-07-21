@@ -41,7 +41,7 @@ class UdpServer {
         case "server::newPeer":
           this.handleNewPeer(message);
           break;
-        case "server:swarm":
+        case "server::swarm":
           this.handleNewSwarm(message);
           break;
         case "remote::newMessage":
@@ -67,13 +67,15 @@ class UdpServer {
   };
 
   handleNewSwarm = message => {
+    console.log("Message", message);
     this.connections = message.peers;
+    console.log("Connections >>> ", this.connections, message.peers);
 
-    this.connection.udpSocket.forEach(peer =>
+    this.connections.forEach(peer =>
       this.sendPacket(
         "remote::punchingHole".toString(2),
-        message.client.port,
-        message.client.address,
+        peer.port,
+        peer.address,
         error => {
           console.log("Error >>> ", error);
         }
