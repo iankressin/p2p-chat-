@@ -40,6 +40,7 @@ class UdpServer {
       switch (message.action) {
         case "server::newPeer":
           this.handleNewPeer(message);
+          this.handleNewPeer(message);
           break;
         // Receive from the server all the node in the network and introduce itselfe
         case "server::announceMe":
@@ -49,7 +50,7 @@ class UdpServer {
         case "remote::newMessage":
           this.handleNewMessage(message);
           break;
-        case "remote::connection":
+        case "remote::announcing":
           this.handleConnection(message);
           this.handleConnection(message);
       }
